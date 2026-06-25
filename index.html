@@ -1,120 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cybersecurity Toolkit</title>
+    <title>Cybersecurity Toolkit</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
 
-<style>
-body{
-    background:#0d1117;
-    color:white;
-    font-family:Arial,sans-serif;
-    margin:0;
-    padding:0;
-}
+        h1{
+            text-align:center;
+        }
 
-header{
-    background:#161b22;
-    padding:20px;
-    text-align:center;
-}
+        .box{
+            border:1px solid #ccc;
+            padding:20px;
+            margin:20px 0;
+            border-radius:10px;
+        }
 
-h1{
-    color:#00ff88;
-}
+        input{
+            padding:10px;
+            width:70%;
+        }
 
-.container{
-    width:80%;
-    margin:auto;
-    padding:20px;
-}
-
-.card{
-    background:#161b22;
-    padding:20px;
-    margin:20px 0;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,255,136,0.3);
-}
-
-h2{
-    color:#00ff88;
-}
-
-footer{
-    text-align:center;
-    padding:15px;
-    background:#161b22;
-    margin-top:20px;
-}
-</style>
+        button{
+            padding:10px;
+            cursor:pointer;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Cybersecurity Toolkit</h1>
-    <p>Password Strength Checker | URL Safety Checker | File Encryption & Decryption</p>
-</header>
+<h1>🔐 Cybersecurity Toolkit</h1>
 
-<div class="container">
+<div class="box">
+    <h2>🔑 Password Strength Checker</h2>
 
-<div class="card">
-<h2>Project Overview</h2>
-<p>
-Cybersecurity Toolkit is a simple Python-based security project designed to improve cybersecurity awareness.
-The toolkit includes tools for checking password strength, analyzing URL safety, and encrypting or decrypting text securely.
-</p>
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkPassword()">Check</button>
+
+    <p id="passwordResult"></p>
 </div>
 
-<div class="card">
-<h2>Password Strength Checker</h2>
-<p>
-This feature checks whether a password is Weak, Medium, or Strong based on length, numbers, uppercase letters, and special characters.
-</p>
+<div class="box">
+    <h2>🌐 URL Safety Checker</h2>
+
+    <input type="text" id="url" placeholder="Enter URL">
+    <button onclick="checkURL()">Check</button>
+
+    <p id="urlResult"></p>
 </div>
 
-<div class="card">
-<h2>URL Safety Checker</h2>
-<p>
-This feature analyzes URLs and helps identify suspicious or potentially unsafe links.
-</p>
-</div>
+<script>
 
-<div class="card">
-<h2>File Encryption & Decryption</h2>
-<p>
-This feature encrypts text to protect information and decrypts it back to its original form when needed.
-</p>
-</div>
+function checkPassword(){
 
-<div class="card">
-<h2>Key Features</h2>
-<ul>
-<li>Password Security Analysis</li>
-<li>URL Safety Verification</li>
-<li>Text Encryption</li>
-<li>Text Decryption</li>
-<li>Simple and User Friendly Interface</li>
-</ul>
-</div>
+    let password = document.getElementById("password").value;
 
-<div class="card">
-<h2>Technologies Used</h2>
-<ul>
-<li>Python</li>
-<li>HTML</li>
-<li>GitHub</li>
-<li>GitHub Pages</li>
-</ul>
-</div>
+    let score = 0;
 
-</div>
+    if(password.length >= 8) score++;
+    if(/[A-Z]/.test(password)) score++;
+    if(/[a-z]/.test(password)) score++;
+    if(/[0-9]/.test(password)) score++;
+    if(/[!@#$%^&*]/.test(password)) score++;
 
-<footer>
-<p>Developed by Devam Parmar © 2026</p>
-</footer>
+    if(score <= 2){
+        document.getElementById("passwordResult").innerHTML =
+        "❌ Weak Password";
+    }
+    else if(score <= 4){
+        document.getElementById("passwordResult").innerHTML =
+        "⚠️ Medium Password";
+    }
+    else{
+        document.getElementById("passwordResult").innerHTML =
+        "✅ Strong Password";
+    }
+}
+
+function checkURL(){
+
+    let url = document.getElementById("url").value;
+
+    if(url.startsWith("https://")){
+        document.getElementById("urlResult").innerHTML =
+        "✅ Safe URL (HTTPS)";
+    }
+    else{
+        document.getElementById("urlResult").innerHTML =
+        "⚠️ Suspicious URL (Not HTTPS)";
+    }
+}
+
+</script>
 
 </body>
 </html>
